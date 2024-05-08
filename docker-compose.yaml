@@ -12,7 +12,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - 5555:5432
+      - XXXX:5432
     networks:
       - xbase
 
@@ -35,21 +35,11 @@ services:
       - postgres
       - template_migrate
     ports:
-      - 5051:5051
+      - XXXX:XXXX
     networks:
       - xbase
     env_file:
       - app.env
-
-  template_ui:
-    build:
-      context: ./portfolio_ui
-      dockerfile: Dockerfile
-    image: my-next-app
-    ports:
-      - "3000:3000"
-    networks:
-      - xbase
 
 networks:
   xbase:
