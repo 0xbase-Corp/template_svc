@@ -3,18 +3,18 @@ package main
 import (
 	"log"
 
-	"github.com/0xbase-Corp/portfolio_svc/docs"
-	"github.com/0xbase-Corp/portfolio_svc/internal/middlewares"
-	"github.com/0xbase-Corp/portfolio_svc/internal/routes"
-	"github.com/0xbase-Corp/portfolio_svc/shared/configs"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/swag/example/basic/docs"
+
+	"github.com/0xbase-Corp/template_svc/internal/middlewares"
+	"github.com/0xbase-Corp/template_svc/shared/configs"
 )
 
 //	@title			0xBase-Corp API
 //	@version		1.0
-//	@description	This is Portfolio server API documentation.
+//	@description	This is Template server API documentation.
 //	@termsOfService	http://swagger.io/terms/
 
 //	@contact.name	0xSantos
@@ -31,7 +31,7 @@ func main() {
 	//Loading Environment variables from app.env
 	configs.InitEnvConfigs()
 
-	db := configs.GetDB()
+	// NOTE: connect with database
 
 	r := gin.Default()
 	r.Use(middlewares.CORSMiddleware())
@@ -47,7 +47,8 @@ func main() {
 		log.Fatal("Failed to setup trusted Proxies")
 	}
 
-	routes.PortfolioRoutes(r, db)
+	// NOTE: Add routes and pass db
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	if err := r.Run(configs.EnvConfigVars.Port); err != nil {

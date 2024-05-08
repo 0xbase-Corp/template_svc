@@ -7,12 +7,9 @@ import (
 )
 
 type EnvConfigs struct {
-	Port             string `mapstructure:"PORT"`
-	DbPassword       string `mapstructure:"DB_PASSWORD"`
-	DatabaseUrl      string `mapstructure:"DATABASE_URL"`
-	Secret           string `mapstructure:"SECRET"`
-	DebankAccessKey  string `mapstructure:"DEBANK_ACCESS_KEY"`
-	MoralisAccessKey string `mapstructure:"MORALIS_ACCESS_KEY"`
+	Port        string `mapstructure:"PORT"`
+	DbPassword  string `mapstructure:"DB_PASSWORD"`
+	DatabaseUrl string `mapstructure:"DATABASE_URL"`
 }
 
 var EnvConfigVars *EnvConfigs
@@ -47,19 +44,4 @@ func loadEnvVariables() (config *EnvConfigs, err error) {
 		log.Fatal(err)
 	}
 	return config, nil
-}
-
-// GetSecret returns the value of JWT_SECRET
-func (env *EnvConfigs) GetSecret() string {
-	return env.Secret
-}
-
-// GetDebankAccessKey returns the value of DEBANK_ACCESS_KEY
-func (env *EnvConfigs) GetDebankAccessKeyHeader() string {
-	return env.DebankAccessKey
-}
-
-// GetMoralisAccessKeyHeader returns the value of MORALIS_ACCESS_KEY
-func (env *EnvConfigs) GetMoralisAccessKeyHeader() string {
-	return env.MoralisAccessKey
 }

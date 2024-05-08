@@ -1,8 +1,8 @@
-# portfolio_svc
+# template_svc
 
 This repositry is a written in Golang
 
-The Portfolio Backend service is responsible for handling all the requests made by **portfolio_ui** service.
+The template Backend service is responsible for handling all the requests made by **template_ui** service.
 
 ## How to Run
 

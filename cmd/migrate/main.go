@@ -8,7 +8,7 @@ import (
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	"github.com/golang-migrate/migrate/v4/source/iofs"
 
-	"github.com/0xbase-Corp/portfolio_svc/shared/configs"
+	"github.com/0xbase-Corp/template_svc/shared/configs"
 )
 
 var (
