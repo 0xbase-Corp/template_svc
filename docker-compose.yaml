@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: portfolio
+      TZ: America/Toronto
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - 5555:5432
+    networks:
+      - xbase
+
+  portofolio_migrate:
+    build:
+      context: .
+      target: migrate
+    depends_on:
+      - postgres
+    networks:
+      - xbase
+    env_file:
+      - app.env
+
+  portofolio_svc:
+    build:
+      context: .
+      target: api
+    depends_on:
+      - postgres
+      - portofolio_migrate
+    ports:
+      - 5050:5050
+    networks:
+      - xbase
+    env_file:
+      - app.env
+  # portofolio_ui:
+  #   build:
+  #     context: ./portfolio_ui
+  #     dockerfile: Dockerfile
+  #   image: my-next-app
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - xbase
+
+networks:
+  xbase:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
+    name: portfolio_db_data
